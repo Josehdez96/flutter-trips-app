@@ -6,16 +6,16 @@ class FirebaseAuthAPI {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  Future<UserCredential> signIn() async {
+  Future<User?> signIn() async {
     GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
     GoogleSignInAuthentication gSA = await googleSignInAccount!.authentication;
-    UserCredential userCredential = await _auth.signInWithCredential(
+    UserCredential user = await _auth.signInWithCredential(
       GoogleAuthProvider.credential(
         idToken: gSA.idToken,
         accessToken: gSA.accessToken
       )
     );
-    return userCredential;
+    return user.user;
   }
 
   void signOut() async {

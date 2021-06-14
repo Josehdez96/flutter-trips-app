@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:travel_app/User/bloc/bloc_user.dart';
 
+import 'package:travel_app/User/bloc/bloc_user.dart';
+import 'package:travel_app/User/model/user.dart' as userModel;
 import 'package:travel_app/my_trips_app.dart';
 import 'package:travel_app/widgets/button_green.dart';
 import 'package:travel_app/widgets/gradient_back.dart';
@@ -59,7 +61,17 @@ class _SignInScreenState extends State<SignInScreen> {
                 height: 50.0,
                 text: 'Login with Gmail',
                 onPressed: () { 
-                  userBloc.signIn();
+                  userBloc.signIn()
+                  .then((User? user) {
+                    userBloc.updateUserData(
+                      userModel.User(
+                        uid: user!.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        photoUrl: user.photoURL,
+                      )
+                    );
+                  });
                  }
               )
             ],

@@ -1,15 +1,17 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
-import 'package:travel_app/User/providers/auth_provider.dart';
+import 'package:travel_app/User/providers/auth/auth_provider.dart';
+import 'package:travel_app/User/providers/cloud_firestore/cloud_firestore_provider.dart';
+import 'package:travel_app/User/model/user.dart' as userModel;
+
 
 // It handles all user use cases
 class UserBloc implements Bloc {
   final _authProvider = new AuthProvider();
+  final _cloudFirestore = new CloudFirestoreProvider();
 
-  Future<UserCredential> signIn() {
-    return _authProvider.signInFirebase();
-  }
+  Future<User?> signIn() => _authProvider.signInFirebase();
 
   void signOut() => _authProvider.signOutFirebase();
 
@@ -17,6 +19,8 @@ class UserBloc implements Bloc {
   // Streamcontroller
   Stream<User?> streamFirebase = FirebaseAuth.instance.authStateChanges(); // listener when authStateChange
   Stream<User?> get authStatus => streamFirebase; // getter from the above listener
+
+  void updateUserData(userModel.User user) => _cloudFirestore.updateUserDataFirestore(user);
 
 
 
