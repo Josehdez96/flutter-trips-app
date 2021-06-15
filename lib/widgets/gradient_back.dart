@@ -1,17 +1,20 @@
-
-
 import 'package:flutter/material.dart';
 
 class GradientBack extends StatelessWidget {
-  String title;
-  double? height;
+  // String title;
+  late double? height;
 
-  GradientBack({required this.title, this.height});
+  GradientBack({this.height});
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height; // Get the device's height
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    height ??= screenHeight; // If height is null then set it equal to screenHeight
     
     return Container(
+      width: screenWidth,
       height: height,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -25,7 +28,19 @@ class GradientBack extends StatelessWidget {
           tileMode: TileMode.clamp
         )
       ),
-      child: Text(
+      child: FittedBox(
+        fit: BoxFit.none,
+        alignment: Alignment(-1.5, -0.8),
+        child: Container(
+          width: screenHeight,
+          height: screenHeight,
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(0, 0, 0, 0.05),
+            borderRadius: BorderRadius.circular(screenHeight / 2)
+          ),
+        ),
+      ),
+      /*Text( 
         title,
         style: TextStyle(
           color: Colors.white,
@@ -34,7 +49,7 @@ class GradientBack extends StatelessWidget {
           fontWeight: FontWeight.w900
         ),
       ),
-      alignment: Alignment(-0.9, -0.6),
+      alignment: Alignment(-0.9, -0.6),*/
     );
   }
 
