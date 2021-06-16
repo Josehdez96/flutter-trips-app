@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:travel_app/widgets/gradient_back.dart';
+import 'package:travel_app/widgets/title_header.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   File? image;
@@ -15,6 +16,7 @@ class AddPlaceScreen extends StatefulWidget {
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -36,6 +38,17 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     },
                   ),
                 ),
+              ),
+              Flexible(
+                child: Container(
+                  width: screenWidth,
+                  padding: EdgeInsets.only(
+                    top: 45,
+                    left: 20,
+                    right: 10
+                  ),
+                  child: TitleHeader(title: 'Add a new Place'),
+                )
               )
             ],
           )
