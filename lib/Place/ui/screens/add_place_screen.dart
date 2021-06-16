@@ -1,13 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:travel_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:travel_app/Place/ui/widgets/text_input_location.dart';
 import 'package:travel_app/widgets/gradient_back.dart';
 import 'package:travel_app/widgets/text_input.dart';
 import 'package:travel_app/widgets/title_header.dart';
 
 class AddPlaceScreen extends StatefulWidget {
-  File? image;
+  File image;
 
   AddPlaceScreen({required this.image});
 
@@ -62,7 +63,15 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             margin: EdgeInsets.only(top: 120.0, bottom: 20.0),
             child: ListView(
               children: [
-                Container(), //foto
+                Container( //foto
+                  alignment: Alignment.center,
+                  child: CardImageWithFabIcon(
+                    width: 330.0,
+                    height: 240.0,
+                    iconData: Icons.camera_alt,
+                    onPressFabIcon: () => {},
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.only(bottom: 20.0),
                   child: TextInput(

@@ -24,7 +24,7 @@ class ButtonsBar extends StatelessWidget {
             () => {}),
             CircleButton(false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1),
             () { 
-              File? image;
+              File image = File('');
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => AddPlaceScreen(image: image))

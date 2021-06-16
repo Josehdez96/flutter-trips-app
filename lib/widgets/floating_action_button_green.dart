@@ -3,6 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FloatingActionButtonGreen extends StatefulWidget {
+  final IconData iconData;
+  final VoidCallback onPressed;
+
+  FloatingActionButtonGreen({
+    required this.iconData,
+    required this.onPressed
+  });
 
   @override
   _FloatingActionButtonGreen createState() => _FloatingActionButtonGreen();
@@ -11,7 +18,6 @@ class FloatingActionButtonGreen extends StatefulWidget {
 class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen> {
   bool isFavorite = false;
   void onPressedFav() {
-
     setState(() {
       isFavorite = !this.isFavorite;
     });
@@ -33,12 +39,8 @@ class _FloatingActionButtonGreen extends State<FloatingActionButtonGreen> {
       backgroundColor: Color(0xFF11DA53),
       mini: true,
       tooltip: 'Fav',
-      onPressed: onPressedFav,
-      child: Icon(
-        isFavorite
-        ? Icons.favorite
-        : Icons.favorite_border
-      ),
+      onPressed: widget.onPressed,
+      child: Icon(widget.iconData),
       heroTag: null,
     );
   }
