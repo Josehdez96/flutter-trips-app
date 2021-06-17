@@ -99,7 +99,11 @@ class DescriptionPlace extends StatelessWidget {
       children: [
         title_stars,
         description,
-        ButtonPurple()
+        ButtonPurple(buttonText: 'Navigate', onPressed: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Navigate'))
+          );
+        })
       ],
     );
   }

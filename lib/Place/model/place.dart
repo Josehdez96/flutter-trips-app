@@ -5,7 +5,7 @@ class Place {
   String? uid;
   String name;
   String description;
-  String urlImage;
+  String? urlImage;
   int? likes;
   User? userOwner;
 
@@ -14,7 +14,7 @@ class Place {
     this.uid,
     required this.name,
     required this.description,
-    required this.urlImage,
+    this.urlImage,
     this.likes,
     this.userOwner
   });

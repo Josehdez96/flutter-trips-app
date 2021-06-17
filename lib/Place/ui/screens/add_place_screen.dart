@@ -1,8 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:travel_app/Place/model/place.dart';
 import 'package:travel_app/Place/ui/widgets/card_image_with_fab_icon.dart';
 import 'package:travel_app/Place/ui/widgets/text_input_location.dart';
+import 'package:travel_app/User/bloc/bloc_user.dart';
+import 'package:travel_app/widgets/button_purple.dart';
 import 'package:travel_app/widgets/gradient_back.dart';
 import 'package:travel_app/widgets/text_input.dart';
 import 'package:travel_app/widgets/title_header.dart';
@@ -19,6 +23,7 @@ class AddPlaceScreen extends StatefulWidget {
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   @override
   Widget build(BuildContext context) {
+    UserBloc userBloc = BlocProvider.of(context);
     double screenWidth = MediaQuery.of(context).size.width;
     final _controllerTitlePlace = TextEditingController();
     final _controllerDescriptionPlace = TextEditingController();
@@ -46,7 +51,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   ),
                 ),
               ),
-              Flexible(
+              Flexible( // It makes overflow/overload proof child, in this case, the container/title
                 child: Container(
                   width: screenWidth,
                   padding: EdgeInsets.only(
@@ -93,6 +98,23 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     hintText: 'Add location',
                     iconData: Icons.location_on_outlined,
                     controller: _controllerLocationPlace
+                  ),
+                ),
+                Container(
+                  width: 20.0,
+                  child: ButtonPurple(
+                    buttonText: 'Add Place',
+                    onPressed: () { 
+                      userBloc.updatePlaceDate(Place(
+                        name: _controllerTitlePlace.text,
+                        description: _controllerDescriptionPlace.text,
+                        likes: 0,
+                        
+                      )).whenComplete(() {
+                        print('TERMINÓ');
+                        Navigator.pop(context);
+                      });
+                     }
                   ),
                 )
               ],
