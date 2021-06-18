@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/widgets/floating_action_button_green.dart';
@@ -12,7 +14,7 @@ class CardImageWithFabIcon extends StatelessWidget {
   final IconData iconData;
 
   CardImageWithFabIcon({
-    this.pathImage = 'https://static.platzi.com/media/tmp/class-files/git/curso-flutter-platzi/Curso-de-Flutter-en-Platzi-9.ImagenDecorada/platzi_trips_app/assets/img/river.jpeg',
+    required this.pathImage,
     this.height = 250.0,
     this.width = 250.0,
     this.margLeft = 20.0,
@@ -23,6 +25,7 @@ class CardImageWithFabIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('SOY PATHIMAGE $pathImage');
     final card = Container(
       height: height,
       width: width,
@@ -33,7 +36,7 @@ class CardImageWithFabIcon extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage(pathImage)
+          image: FileImage(File(pathImage))
         ),
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         shape: BoxShape.rectangle,
