@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:travel_app/Place/model/place.dart';
@@ -105,7 +106,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   width: 20.0,
                   child: ButtonPurple(
                     buttonText: 'Add Place',
-                    onPressed: () { 
+                    onPressed: () {
                       userBloc.updatePlaceDate(Place(
                         name: _controllerTitlePlace.text,
                         description: _controllerDescriptionPlace.text,

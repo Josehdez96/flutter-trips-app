@@ -1,5 +1,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:travel_app/Place/model/place.dart';
 import 'package:travel_app/User/providers/auth/auth_provider.dart';
@@ -20,6 +21,8 @@ class UserBloc implements Bloc {
   // Streamcontroller
   Stream<User?> streamFirebase = FirebaseAuth.instance.authStateChanges(); // listener when authStateChange
   Stream<User?> get authStatus => streamFirebase; // getter from the above listener
+
+  Future<User?> currentUser() async => FirebaseAuth.instance.currentUser;
 
   // 2. Register user in the DB
   void updateUserData(userModel.User user) => _cloudFirestore.updateUserDataFirestore(user);
